@@ -1,0 +1,54 @@
+// function that gives the number of nodes in the tree
+FUNCTION nb_nodes(root : ^BT) : INTEGER
+BEGIN
+    IF (root = NULL) THEN
+        RETURN 0;
+    ELSE
+        RETURN 1 + nb_nodes(root^.LC) + nb_nodes(root^.RC);
+    END_IF
+END
+
+//function that gives the height of a tree
+FUNCTION max(a,b : INTEGER) : INTEGER
+BEGIN
+    IF (a < b) THEN
+        RETURN b;
+    ELSE
+        RETURN a;
+    END_IF
+END
+
+FUNCTION height(root : ^BT) : INTEGER
+BEGIN
+    IF (root = NULL) THEN
+        RETURN 0;
+    ELSE
+        RETURN 1 + max(height(root^.LC),height(root^.RC));
+    END_IF
+END
+
+// Function that gives the maximum value in the tree
+FUNCTION max(root: ^binary_tree) : INTEGER
+VAR
+    m: INTEGER:=0;
+BEGIN
+    IF (max(root^.VAL>m)) THEN
+        m:=root^.VAL;
+    ELSE
+        max(root^.LC);
+        max(root^.RC);
+    END_IF
+    RETURN m;
+END
+
+//function that gives the maximum value in the tree.
+FUNCTION nb_leaves(root : ^BT) : INTEGER
+BEGIN
+    IF (root = NULL) THEN
+        RETURN 0;
+    ELSE_IF(root^.LC = NULL AND root^.RC = NULL)
+        RETURN 1;
+    ELSE
+        RETURN  nb_leaves(root^.LC) + nb_leaves(root^.RC);
+    END_IF
+END
